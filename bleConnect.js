@@ -2,7 +2,7 @@ var Cylon = require('cylon');
 
 Cylon.robot({
   connections: {
-    wiced: { adaptor: 'ble', uuid: 'e5676db2132f' }
+    wiced: { adaptor: 'ble', uuid: 'e5:67:6d:b2:13:2f' }
   },
 
   devices: {
