@@ -2,22 +2,30 @@ var Cylon = require('cylon');
 
 Cylon.robot({
   connections: {
-    wiced: { adaptor: 'ble', uuid: 'e5:67:6d:b2:13:2f' }
+    bluetooth: { adaptor: 'central', uuid: 'cc360e85785e', module: 'cylon-ble' }
   },
 
   devices: {
-    battery: { driver: 'ble-battery-service' }
+    bb8: { driver: 'bb8', module: 'cylon-sphero-ble' }
   },
 
   work: function(my) {
-    every((1).second(), function() {
-      my.battery.getBatteryLevel(function(err, data){
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("BatteryLevel:", data);
-        }
-      });
+    my.bb8.color(0x00FFFF);
+
+    after(500, function() {
+      my.bb8.color(0xFF0000);
+    });
+
+    after(1000, function() {
+      my.bb8.roll(60, 0);
+    });
+
+    after(2000, function() {
+      my.bb8.roll(60, 180);
+    });
+
+    after(3000, function() {
+      my.bb8.stop();
     });
   }
 }).start();
